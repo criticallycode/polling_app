@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-center mb-3">Poll Questions</h1>
+    <!--- For the individual question in the list,
+     Show the question in a card, the question text, and vote/results button-->
+    {% if question_list %}
+        {% for question in question_list %}
+        <!-- Double curly braces to show piece of data -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <p class="lead">{{ question.question_text }}</p>
+            <!-- References the polls namespace in the urls.py -->
+          <a href="{% url 'polls:detail' question.id %}" class="btn btn-primary btn-sm">Vote</a>
+          <a href="{% url 'polls:results' question.id %}" class="btn btn-secondary btn-sm">See Results</a>
+        </div>
+      </div>
+        {% endfor %}
+    <!-- If No polls found -->
+    {% else %}
+        <p>No polls found.</p>
+    {% endif %}
+{% endblock %}
